@@ -1,0 +1,35 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.example:demo-app >--------
+[INFO] Building demo-app 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.0:resources (default-resources) @ demo-app ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/runner/work/demo-app/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ demo-app ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8
+[INFO] Compiling 2 source files with javac [debug release 11] to target/classes
+[ERROR] /home/runner/work/demo-app/src/main/java/com/example/App.java:[3,22] package org.slf4j does not exist
+[ERROR] /home/runner/work/demo-app/src/main/java/com/example/App.java:[4,22] package org.slf4j does not exist
+[ERROR] /home/runner/work/demo-app/src/main/java/com/example/App.java:[14,12] cannot find symbol
+  symbol:   class Logger
+  location: class com.example.App
+[ERROR] /home/runner/work/demo-app/src/main/java/com/example/App.java:[14,38] cannot find symbol
+  symbol:   class LoggerFactory
+  location: class com.example.App
+[INFO] 4 errors
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.142 s
+[INFO] Finished at: 2026-05-13T10:15:22Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project demo-app: Compilation failure: Compilation failure:
+[ERROR] /home/runner/work/demo-app/src/main/java/com/example/App.java:[3,22] package org.slf4j does not exist
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.

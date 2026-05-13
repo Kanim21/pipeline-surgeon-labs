@@ -1,0 +1,5 @@
+{
+  "failure_class": "compilation_error",
+  "target_file": "src/main/java/com/example/UserService.java",
+  "reasoning_keywords": ["UserRepository", "symbol", "method"]
+}

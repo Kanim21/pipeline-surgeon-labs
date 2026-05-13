@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.rbc.demo:pipeline-surgeon-target >--------
+[INFO] Building pipeline-surgeon-target 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce) @ pipeline-surgeon-target ---
+[WARNING] Rule 0: org.apache.maven.plugins.enforcer.DependencyConvergence failed with message:
+Failed while enforcing releasability the error(s) are [
+Dependency convergence error for org.apache.commons:commons-lang3:3.12.0 paths to dependency are:
++-com.rbc.demo:pipeline-surgeon-target:1.0-SNAPSHOT
+  +-org.apache.commons:commons-lang3:3.12.0
+and
++-com.rbc.demo:pipeline-surgeon-target:1.0-SNAPSHOT
+  +-org.apache.commons:commons-lang3:3.1
+]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.987 s
+[INFO] Finished at: 2026-05-13T09:33:14Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:3.1.0:enforce (enforce) on project pipeline-surgeon-target: Some Enforcer rules have failed. Look above for specific messages regarding failed rules.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

@@ -1,0 +1,25 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.example:data-processor >--------
+[INFO] Building data-processor 1.5-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce) @ data-processor ---
+[WARNING] Rule 0: org.apache.maven.plugins.enforcer.DependencyConvergence failed with message:
+Failed while enforcing releasability the error(s) are [
+Dependency convergence error for com.fasterxml.jackson.core:jackson-databind:2.15.2 paths to dependency are:
++-com.example:data-processor:1.5-SNAPSHOT
+  +-com.fasterxml.jackson.core:jackson-databind:2.15.2
+and
++-com.example:data-processor:1.5-SNAPSHOT
+  +-com.example:shared-lib:1.0.0
+    +-com.fasterxml.jackson.core:jackson-databind:2.14.0
+]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.103 s
+[INFO] Finished at: 2026-05-13T14:27:33Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:3.1.0:enforce (enforce) on project data-processor: Some Enforcer rules have failed. Look above for specific messages regarding failed rules.
+[ERROR] -> [Help 1]

@@ -1,0 +1,5 @@
+{
+  "failure_class": "missing_dependency",
+  "target_file": "pom.xml",
+  "reasoning_keywords": ["slf4j", "missing", "dependency"]
+}

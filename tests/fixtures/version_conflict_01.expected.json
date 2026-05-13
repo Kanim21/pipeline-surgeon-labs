@@ -1,0 +1,5 @@
+{
+  "failure_class": "version_conflict",
+  "target_file": "pom.xml",
+  "reasoning_keywords": ["commons-lang3", "convergence", "version"]
+}

@@ -1,0 +1,27 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.example:core-service >--------
+[INFO] Building core-service 3.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ core-service ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files with javac [debug release 11] to target/classes
+[ERROR] /home/runner/work/core-service/src/main/java/com/example/UserService.java:[42,31] cannot find symbol
+  symbol:   method getUserByEmail(java.lang.String)
+  location: variable repo of type com.example.UserRepository
+[ERROR] /home/runner/work/core-service/src/main/java/com/example/UserService.java:[67,27] cannot find symbol
+  symbol:   method findActiveUsers()
+  location: variable repo of type com.example.UserRepository
+[ERROR] 2 errors
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.218 s
+[INFO] Finished at: 2026-05-13T12:10:07Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project core-service: Compilation failure
+[ERROR] /home/runner/work/core-service/src/main/java/com/example/UserService.java:[42,31] cannot find symbol
+  symbol:   method getUserByEmail(java.lang.String)
+  location: variable repo of type com.example.UserRepository
+[ERROR] -> [Help 1]

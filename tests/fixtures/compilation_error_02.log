@@ -1,0 +1,23 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.example:auth-service >--------
+[INFO] Building auth-service 1.2-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ auth-service ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files with javac [debug release 11] to target/classes
+[ERROR] /home/runner/work/auth-service/src/main/java/com/example/auth/TokenValidator.java:[28,19] incompatible types: java.lang.String cannot be converted to com.example.auth.TokenType
+[ERROR] /home/runner/work/auth-service/src/main/java/com/example/auth/TokenValidator.java:[35,16] cannot find symbol
+  symbol:   method validate(com.example.auth.TokenType)
+  location: class com.example.auth.JwtParser
+[ERROR] 2 errors
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.651 s
+[INFO] Finished at: 2026-05-13T15:44:21Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project auth-service: Compilation failure
+[ERROR] /home/runner/work/auth-service/src/main/java/com/example/auth/TokenValidator.java:[28,19] incompatible types: java.lang.String cannot be converted to com.example.auth.TokenType
+[ERROR] -> [Help 1]
