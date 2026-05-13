@@ -25,7 +25,9 @@ def search_maven_central(query: str) -> list:
 def read_source_file(path: str, line_range: list) -> str:
     repo_root = Path(os.environ.get("REPO_ROOT", ".")).resolve()
     target = (repo_root / path).resolve()
-    if not str(target).startswith(str(repo_root)):
+    try:
+        target.relative_to(repo_root)
+    except ValueError:
         raise ValueError(f"Path escapes repo root: {path}")
     if target.is_symlink():
         raise ValueError(f"Symlinks not allowed: {path}")

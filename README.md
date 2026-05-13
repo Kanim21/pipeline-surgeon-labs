@@ -61,7 +61,7 @@ flowchart LR
   - `missing_dependency` — `package X.Y.Z does not exist`
   - `version_conflict` — Maven enforcer or dependency resolution conflicts
   - `compilation_error` — `cannot find symbol`, `cannot resolve method`, etc.
-- **Two tools the agent can call:**
+- **Two callable tools** (plus a `Diagnosis` structured-output tool that forces the final schema):
   - `search_maven_central(query)` — returns top 3 matches with version metadata
   - `read_source_file(path, line_range)` — reads bounded chunks of source
 - **Secret redactor** runs on the build log before any data leaves the runner.
@@ -69,8 +69,9 @@ flowchart LR
   common API key patterns.
 - **Pull-request output** via `peter-evans/create-pull-request` — no
   auto-commit to `main`, ever.
-- **Token budget per run** (8K input + 2K output) — hard cap prevents
-  runaway costs on noisy logs.
+- **Token budget per run** — log truncated to 24K chars (~6K tokens) before
+  the API call; output hard-capped at 2K tokens. Prevents runaway costs on
+  noisy logs.
 - **Test corpus** in `tests/fixtures/` — 6 known-failure cases (2 per class),
   used to validate classification accuracy in CI.
 
@@ -127,8 +128,8 @@ Claude returns a `Diagnosis` tool call with this schema:
 ```
 
 The agent code only acts if `confidence >= threshold` (default 0.6) and
-`proposed_fix` is non-null. Below threshold, it opens a PR titled
-`[surgeon] unable to diagnose` with the reasoning attached for human review.
+`proposed_fix` is non-null. Below threshold, it opens a PR whose title begins with
+`[surgeon] unable to diagnose` and includes the reasoning for human review.
 
 ### Tool surface
 
@@ -266,10 +267,12 @@ LLMs vary).
   deployments should use OIDC + a managed secret store.
 - **No auto-commit.** The agent opens pull requests. It cannot commit to
   `main` directly.
-- **Bounded tool surface.** The agent has two tools, both with read-only
-  external access and tight input validation. No shell, no file writes, no
-  arbitrary HTTP.
-- **Token caps.** Every run is capped at 8K input + 2K output tokens.
+- **Bounded tool surface.** The agent has two callable tools
+  (`search_maven_central`, `read_source_file`), both with read-only external
+  access and tight input validation, plus a `Diagnosis` tool used solely for
+  structured output. No shell, no file writes, no arbitrary HTTP.
+- **Token caps.** Build log truncated to 24K chars (~6K tokens) before the
+  API call; model output capped at 2K tokens per run.
 - **Log redaction.** Build logs sometimes leak secrets. Before sending the
   log to Claude, the agent runs it through a redactor that strips anything
   matching common secret patterns (AWS keys, GitHub tokens, URLs with
