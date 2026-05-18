@@ -174,13 +174,64 @@ backoff.
 
 ## Measured results
 
-Populated at the end of Phase 1, after running the agent against the test
-fixture corpus.
+Measured against the 6-fixture corpus (2 per failure class) using
+`claude-sonnet-4-6`. Run date: 2026-05-18.
 
-- Classification accuracy by failure class: TBD
-- Confidence threshold calibration (sweep from 0.3 to 0.9): TBD
-- Cost per successful diagnosis: TBD
-- Cost per unknown classification: TBD
+### Classification accuracy
+
+| Failure class       | Correct | Total | Accuracy |
+|---------------------|---------|-------|----------|
+| `missing_dependency`  | 2       | 2     | 100%     |
+| `version_conflict`    | 2       | 2     | 100%     |
+| `compilation_error`   | 2       | 2     | 100%     |
+| **Overall**           | **6**   | **6** | **100%** |
+
+`target_file` accuracy: 5/6 (83%) — one compilation error fixture had the
+correct class but the agent identified a secondary rather than primary file.
+Fix proposed on all 6 runs (100%).
+
+### Confidence threshold calibration
+
+All 6 fixtures returned confidence ≥ 0.90. The per-fixture scores:
+
+| Fixture                 | Confidence |
+|-------------------------|-----------|
+| `version_conflict_01`   | 1.00      |
+| `missing_dep_01`        | 0.97      |
+| `missing_dep_02`        | 0.97      |
+| `version_conflict_02`   | 0.97      |
+| `compilation_error_01`  | 0.92      |
+| `compilation_error_02`  | 0.90      |
+
+Threshold sweep — fraction of fixtures the agent acts on (vs. escalating as
+"unable to diagnose"):
+
+| Threshold | Act | Escalate | Notes |
+|-----------|-----|----------|-------|
+| 0.3       | 6/6 | 0/6      | |
+| 0.6 (default) | 6/6 | 0/6 | Sweet spot for Phase 1 corpus |
+| 0.90      | 6/6 | 0/6      | |
+| 0.91      | 5/6 | 1/6      | `compilation_error_02` escalates |
+| 0.93      | 4/6 | 2/6      | Both compilation errors escalate |
+| 0.98      | 1/6 | 5/6      | Only `version_conflict_01` acts |
+
+**Recommendation:** keep the default threshold at 0.6. The corpus shows
+compilation errors consistently score 0.90–0.92 — raising above 0.90 causes
+false escalations on a well-understood failure class.
+
+### Cost and latency
+
+| Metric                    | Value    |
+|---------------------------|----------|
+| Mean input tokens / run   | 10,240   |
+| Mean output tokens / run  | 1,208    |
+| Mean cost / run           | $0.0488  |
+| Total cost (6 fixtures)   | $0.2930  |
+| Mean latency / run        | 20.8 s   |
+
+Cost per unknown classification: $0 on this corpus (no unknowns produced).
+At $0.05/run, a project with 200 CI failures per month costs ~$10/month in
+API spend — well under the cost of a single engineer-hour of manual triage.
 
 ## Quick start
 
